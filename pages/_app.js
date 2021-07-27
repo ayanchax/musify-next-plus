@@ -17,10 +17,10 @@ import { DataLayer } from "../configurations/DataLayer"
 import reducer, { initialState } from "../configurations/reducer";
 
 function MyApp({ Component, pageProps }) {
-    return (<DataLayer initialState={initialState} reducer={reducer}>
-        <Component {...pageProps}
-        />;
-    </DataLayer>)
+    return (<div suppressHydrationWarning><DataLayer initialState={initialState} reducer={reducer}>
+        {typeof window === 'undefined' ? null : <Component {...pageProps} />}
+
+    </DataLayer></div>)
 
 
 }
