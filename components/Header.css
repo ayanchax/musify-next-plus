@@ -1,0 +1,54 @@
+    .header {
+        background-image: linear-gradient(to right, #262626, #3b3b8a);
+    }
+    
+    .header__logo {
+        position: fixed;
+        left: 0px;
+        width: 140px;
+        object-fit: contain;
+        cursor: pointer
+    }
+    
+    .header__avatar {
+        position: fixed;
+        right: 20px;
+        width: 30px;
+        object-fit: contain;
+        margin-top: 8px;
+    }
+    
+    .header__title {
+        margin-left: 10px;
+        padding: 5px;
+        font-size: 12px;
+    }
+    
+    .header>hr {
+        border: 1px solid #282828;
+        width: 90%;
+        margin: 10px auto;
+    }
+    
+    .header__actions {
+        display: flex;
+        justify-content: space-evenly;
+        text-align: center;
+        font-size: small!important;
+    }
+    
+    .header__userAccountOptions {
+        list-style: none;
+        font-size: small !important;
+        padding: 5px !important;
+        cursor: pointer;
+        text-align: left !important;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-image: linear-gradient(to right, #262626, #3b3b8a)!important;
+        color: #fff;
+    }
+    
+    .header__userAccountOptions:hover {
+        background-image: linear-gradient(to right, #8092b9, darkgrey);
+        font-style: italic;
+    }

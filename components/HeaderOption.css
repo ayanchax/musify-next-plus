@@ -1,0 +1,39 @@
+.headeroption {
+    color: darkgrey;
+    font-size: 1rem;
+    ;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    font-size: small!important;
+    cursor: pointer;
+    transition: 200ms color ease-in;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;
+}
+
+.headeroption:hover {
+    color: white;
+}
+
+.headeroption__icon {
+    /* padding-left: 10px;
+    padding-right: 5px; */
+}
+
+.headeroption>p {
+    margin-top: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;
+    font-size: 14px;
+}
+
+.headeroption>h4 {
+    margin-left: 0px;
+    color: darkgrey!important;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;
+}
+
+.headeroption>h4:hover {
+    color: white!important;
+}

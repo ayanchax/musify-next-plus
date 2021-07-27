@@ -1,0 +1,75 @@
+.player {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    /* height: 50px; */
+    width: 100%;
+    margin-top: auto;
+    color: white;
+}
+
+.rhap_container {
+    border: none!important;
+    background-image: linear-gradient(to right, #262626, #121212);
+    /* height: 50px; */
+    /* linear-gradient(to right, #8092b9, black); */
+    color: white !important;
+}
+
+.rhap_time {
+    color: white !important;
+}
+
+.rhap_progress-indicator,
+.rhap_progress-filled {
+    background-color: #1976D2!important;
+}
+
+.rhap_button-clear {
+    background-color: transparent !important;
+    color: #fbfbff!important;
+}
+
+.skipBtn {
+    color: darkgrey!important;
+    cursor: pointer !important;
+}
+
+.skipBtn:hover {
+    color: white!important;
+}
+
+.translucent {
+    pointer-events: none;
+    background-image: linear-gradient(to right, #8092b9, darkgrey);
+    opacity: 0.5;
+    cursor: wait;
+}
+
+.favorite-icon {
+    display: flex;
+    margin-top: 3px!important;
+    cursor: pointer!important;
+}
+
+.share-icon {
+    color: #fff!important;
+    margin-top: -2px!important;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.player__flex {
+    display: flex!important;
+}
+
+.player__current__song__metadata {
+    margin-top: 5px !important;
+    margin-left: 0px!important;
+}
+
+.MuiFormControlLabel-root {
+    margin-top: -10px!important;
+    margin-left: 12px!important
+}

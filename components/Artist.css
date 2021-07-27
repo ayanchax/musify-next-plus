@@ -1,0 +1,6 @@
+.artist__posters {
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+.artist__image {}

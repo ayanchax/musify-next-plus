@@ -1,0 +1,87 @@
+form>button {
+    display: none;
+}
+
+.search {
+    color: #fff;
+    justify-content: center;
+    padding: 10px !important;
+    position: sticky!important;
+    z-index: 1
+}
+
+.search__form {
+    display: flex;
+}
+
+.MuiInput-input {
+    color: #fff!important;
+    font-size: 1rem!important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;
+    border-bottom: 1px solid darkgrey!important;
+}
+
+.search__icon {
+    color: darkgrey;
+    padding: 2px !important;
+}
+
+@media only screen and (max-width: 640px) {
+    .search__input {
+        border: none;
+        display: flex;
+        border-radius: 30px;
+        padding: 5px;
+        outline: none;
+        justify-content: center;
+        color: #fff!important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .search__input {
+        border: none;
+        display: flex;
+        border-radius: 30px;
+        padding: 5px;
+        outline: none;
+        justify-content: center;
+        color: #fff!important;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .search__input {
+        border: none;
+        display: flex;
+        border-radius: 30px;
+        padding: 5px;
+        outline: none;
+        justify-content: center;
+        color: #fff!important;
+    }
+}
+
+@media only screen and (max-width: 1280px) {
+    .search__input {
+        border: none;
+        display: flex;
+        border-radius: 30px;
+        padding: 5px;
+        outline: none;
+        justify-content: center;
+        color: #fff!important;
+    }
+}
+
+@media only screen and (max-width: 1920px) {
+    .search__input {
+        border: none;
+        display: flex;
+        border-radius: 30px;
+        padding: 5px;
+        outline: none;
+        justify-content: center;
+        color: #fff!important;
+    }
+}

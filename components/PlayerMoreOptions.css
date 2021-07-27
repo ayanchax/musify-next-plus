@@ -1,0 +1,30 @@
+.player__moreOptionsList {
+    list-style: none;
+    font-size: small !important;
+    padding: 5px !important;
+    cursor: pointer;
+    text-align: left !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: linear-gradient(to right, #262626, #121212);
+    color: #fff;
+    box-shadow: none!important;
+}
+
+.player__moreOptionsList:hover {
+    background-image: linear-gradient(to right, #8092b9, darkgrey);
+    font-style: italic;
+}
+
+.player__horizontalBar {
+    background: darkgrey;
+    border: 1px solid darkgrey
+}
+
+.playermoreoptions {
+    display: flex;
+    flex-direction: column;
+}
+
+.MuiPaper-root {
+    box-shadow: none!important;
+}

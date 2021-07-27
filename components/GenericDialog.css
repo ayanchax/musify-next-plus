@@ -1,0 +1,49 @@
+.genericdialog__title {
+    top: 5px;
+    font-size: 1.5rem;
+}
+
+.genericdialog__some-network__share-count {
+    display: inline-flex;
+    justify-content: center;
+    white-space: nowrap;
+    overflow: visible;
+    width: 0;
+    margin-top: 3px;
+    font-size: 12px;
+}
+
+.genericdialog__headerTitle {
+    padding-top: 10px !important;
+    font-size: 2rem!important;
+}
+
+.genericdialog__some-network__share-button {
+    cursor: pointer;
+    padding: 5px!important;
+}
+
+.genericdialog__some-network__share-button:hover:not(:active) {
+    opacity: 0.75;
+}
+
+.genericdialog__some-network__custom-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.genericdialog__share__container {
+    display: flex!important;
+    margin-top: -10px
+}
+
+.MuiDialog-paperScrollPaper {
+    background-image: linear-gradient(to right, #262626, #3b3b8a)!important;
+    color: white!important;
+}
+
+.genericdialog__button {
+    color: white !important;
+    font-weight: normal!important;
+    color: darkgrey!important;
+}

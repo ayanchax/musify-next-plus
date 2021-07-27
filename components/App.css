@@ -1,0 +1,40 @@
+.app__body {}
+
+.app {
+    min-height: 100%;
+    display: block;
+    position: relative;
+    padding-bottom: 120px;
+    width: 100%;
+}
+
+* {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+body {
+    /* background-image: linear-gradient(to right, #262626, #3b3b8a); */
+    background-image: linear-gradient(to right, #3b3b8a, #111);
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+
+::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
+}

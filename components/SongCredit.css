@@ -1,0 +1,20 @@
+.songcredit {
+    color: #fff;
+}
+
+.songcredit__header {
+    color: darkgrey;
+    border-bottom: 1px solid lightgrey;
+}
+
+.songcredit__title,
+.songcredit__artist,
+.songcredit__album,
+.songcredit__genre,
+.songcredit__othercomments {
+    padding: 5px;
+}
+
+.songcredit__comments {
+    font-size: small;
+}
