@@ -21,7 +21,7 @@ function AutoSuggest({ songSuggestions, playlistsSuggestions, albumsSuggestion, 
                 {/* SONGS RESULTS */}
                 <div className=" suggestBox__songs grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     {songSuggestions?.map((songSuggestion, index) => (
-                        <Link key={songSuggestion?.id} to={`/song/${songSuggestion?.id}/${songSuggestion?.title}`} key={songSuggestion?.id}
+                        <Link key={songSuggestion?.id} to={`/song/${songSuggestion?.id}/${songSuggestion?.title}`}
                             title={parse(songSuggestion?.title)}
                             className="px-2 py-1 font-sans  flex flex-grow cursor-pointer group 
                           hover:bg-blue-600"

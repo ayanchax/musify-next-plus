@@ -417,7 +417,7 @@ function PlaylistContent({ setSearchSuggestionWindowOpened, isIndian, fetchUrl, 
                 )}
                 {playlistSongs?.title && (
                     <div className="flex flex-grow space-x-2  mt-2">
-                        <button class="bg-blue-500 hover:bg-red-700 hover:shadow-md text-white  font-semibold focus:outline-none 
+                        <button className="bg-blue-500 hover:bg-red-700 hover:shadow-md text-white  font-semibold focus:outline-none 
                     mr-1 mb-1 ease-linear transition-all duration-150 py-2 px-4 rounded shadow text-md lg:text-lg font-sans">
                             <PlayCircleFilledRoundedIcon className="content__icon" /> Play All
                         </button>
