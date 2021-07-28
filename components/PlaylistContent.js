@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "../configurations/axios";
 import { v4 as uuidv4 } from 'uuid';
-import { useParams } from "react-router-dom";
 import { truncate, duration, formatted_duration } from "../utils/utility"
 import { useDataLayerContextValue } from "../configurations/DataLayer";
 import { actionTypes } from "../configurations/reducer";
@@ -24,16 +22,14 @@ import "react-toastify/dist/ReactToastify.css";
 import PlaylistShareDialog from "./PlaylistShareDialog";
 import PlayerListMoreOptions from "./PlaylistMoreOptions";
 import { BASE } from "../configurations/environments"
-import { useHistory } from "react-router-dom";
+import { useRouter } from "next/router"
+
+
 toast.configure();
 
-function PlaylistContent({ setSearchSuggestionWindowOpened, isIndian, fetchUrl, media, pauseRequested, mediaFavorited, metaCurrentUrl, metaTitle, metaDescription, metaImage }) {
-    const [playlistSongs, setPlaylistSongs] = useState([]);
-    const playlistid = useParams()?.playlistid
-    const playlistTitle = useParams()?.playlistTitle
-    const [{ featuredPlaylists }, dispatch] = useDataLayerContextValue()
+function PlaylistContent({ playlistSongs, setSearchSuggestionWindowOpened, isIndian, media, pauseRequested, mediaFavorited, metaCurrentUrl, metaTitle, metaDescription, metaImage, tempTitle }) {
+    const router = useRouter()
     const [{ selectedSongNeedle, favoriteSongsInPlaylist, pause, play, favorited }, dispatch_v2] = useDataLayerContextValue();
-    const history = useHistory();
     const [playing, setPlaying] = useState(false);
     const [paused, setPaused] = useState(false);
     const [currentSong, setCurrentSong] = useState({});
@@ -50,7 +46,15 @@ function PlaylistContent({ setSearchSuggestionWindowOpened, isIndian, fetchUrl, 
     const id = open ? "simple-popover" : undefined;
     const playlist_popover_id = openPlaylist ? "simple-popover" : undefined;
 
+
+    useEffect(() => {
+        dispatch_v2({
+            type: actionTypes.SET_FEATURED_PLAYLISTS,
+            featuredPlaylist: playlistSongs,
+        })
+    }, [playlistSongs]);
     const playMedia = (song) => {
+        tempTitle(song?.title)
         setCurrentSong(song)
         setPlaying(true);
         setPaused(false);
@@ -60,67 +64,14 @@ function PlaylistContent({ setSearchSuggestionWindowOpened, isIndian, fetchUrl, 
             mediaFavorited(true)
         }
         else mediaFavorited(false)
-        setUpMeta(song?.id, song?.title, song?.image, song?.subtitle, "song")
-    }
-
-    const setUpMeta = (_id, _title, _image, _description, _type) => {
-
-        if (_type === "default") {
-            metaCurrentUrl(BASE);
-            metaTitle("Enjoy Ad Free Premium Content Music");
-            metaImage(BASE + "static/media/logo.6714a076.png");
-            metaDescription("Tired of listening to ads and premium subscriptions while streaming music? Well you might like my new music streaming app #musify in this case. Pls visit " + BASE + " for fresh music content ad free. You just need to sign in using your google credentials and enjoy high quality(320, 640, 1080kbps) ad free music."
-            );
-            return;
-        }
-        if (_id === undefined || _title === undefined || _image === undefined || _description === undefined) {
-
-            return;
-        }
-
-        if (_id && _title && _image && _description && _type) {
-
-            if (_type === "song") {
-                metaCurrentUrl(BASE + "song/" + _id + "/" + _title);
-                metaTitle(_title);
-                metaImage(_image);
-                metaDescription(_description);
-                return
-            }
-            if (_type === "playlist") {
-
-                metaCurrentUrl(BASE + "playlist/" + _id + "/" + _title);
-                metaTitle(_title);
-                metaImage(_image);
-                metaDescription(_description);
-                return;
-            }
-            return
-        }
 
     }
     const pauseMedia = (e) => {
+        tempTitle(currentSong?.title)
         setPlaying(false);
         setPaused(true);
         pauseRequested(true)
     }
-    useEffect(() => {
-        const fetchData = () => {
-            axios.get(fetchUrl + playlistid).then((response) => {
-                setPlaylistSongs(response.data)
-                dispatch({
-                    type: actionTypes.SET_FEATURED_PLAYLISTS,
-                    featuredPlaylist: response.data,
-                })
-                if (!play)
-                    setUpMeta(playlistid, playlistTitle, response.data?.image, response.data?.header_desc, "playlist")
-            })
-        }
-
-        fetchData();
-    }, [fetchUrl]);
-
-
     useEffect(() => {
         if (pause) {
             setPlaying(false);
@@ -193,37 +144,14 @@ function PlaylistContent({ setSearchSuggestionWindowOpened, isIndian, fetchUrl, 
             setNeedleSelected(true);
         }
         else {
-
             setNeedleSelected(false);
         }
         updateShowModal((state) => !state);
 
-        if (showModal) {
-            if (currentSong !== null && (playing || paused)) {
-                //song meta
-
-                setUpMeta(currentSong?.id, currentSong?.title, currentSong?.image, currentSong?.subtitle, "song")
-            }
-            else {
-                //playlist metaDescription
-                setUpMeta(playlistid, playlistTitle, playlistSongs?.image, playlistSongs?.header_desc, "playlist")
-            }
-        }
-
-
     }
     const togglePlaylistModal = (event) => {
         updateShowPlaylistModal((state) => !state)
-        if (showPlaylistModal) {
-            if (currentSong !== null && (playing || paused)) {
-                //song meta
-                setUpMeta(currentSong?.id, currentSong?.title, currentSong?.image, currentSong?.subtitle, "song")
-            }
-            else {
-                //playlist metaDescription
-                setUpMeta(playlistid, playlistTitle, playlistSongs?.image, playlistSongs?.header_desc, "playlist")
-            }
-        }
+
     }
     const toggleFavorites = (e, isOpenedFromPlaylist, playListSong) => {
         e.preventDefault();
@@ -234,9 +162,7 @@ function PlaylistContent({ setSearchSuggestionWindowOpened, isIndian, fetchUrl, 
             togglePlaylistFavorite();
 
         }
-
     }
-
     const togglePlaylistFavorite = () => {
         if (!playListFavorite) {
             setPlaylistFavorite(true);
@@ -252,8 +178,6 @@ function PlaylistContent({ setSearchSuggestionWindowOpened, isIndian, fetchUrl, 
             });
         }
     }
-
-
 
     const manageFavorites = (playListSong) => {
         dispatch_v2({
@@ -308,16 +232,13 @@ function PlaylistContent({ setSearchSuggestionWindowOpened, isIndian, fetchUrl, 
 
     const backHome = (e) => {
         e.preventDefault();
-        if (!playing || currentSong === null) {
-            setUpMeta(null, null, null, null, "default")
-        }
-        history.push("/");
+        router.push("/")
 
     }
     return playlistSongs && (<div className="content" onClick={(e) => setSearchSuggestionWindowOpened(false)}>
 
         <ShareDialog
-            url={BASE + "song/" + selectedSongNeedle?.id + "/" + selectedSongNeedle?.title}
+            url={BASE + "song?songid=" + selectedSongNeedle?.id + "&songTitle=" + selectedSongNeedle?.title}
             networks={[
                 "facebook",
                 "messenger",
@@ -339,7 +260,7 @@ function PlaylistContent({ setSearchSuggestionWindowOpened, isIndian, fetchUrl, 
             uniqueToken={showModal ? uuidv4() : ""}
         />
         <PlaylistShareDialog
-            url={BASE + "playlist/" + playlistid + "/" + playlistTitle}
+            url={window.location.href}
             networks={[
                 "facebook",
                 "messenger",
@@ -348,7 +269,7 @@ function PlaylistContent({ setSearchSuggestionWindowOpened, isIndian, fetchUrl, 
             content={playlistSongs}
             title="Share"
             contentTitle={truncate(
-                playlistTitle,
+                playlistSongs?.title,
                 100
             )}
             isOpen={showPlaylistModal}

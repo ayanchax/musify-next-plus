@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import GenericDialog from "../components/GenericDialog";
 import { useDataLayerContextValue } from "../configurations/DataLayer";
 import MusicNoteIcon from "@material-ui/icons/MusicNote";
 import SongCredit from "../components/SongCredit";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { BASE } from "../configurations/environments"
+import { BASE } from "../configurations/environments";
 toast.configure();
 function PlayerMoreOptions({ openedFromPlaylist, onClosed }) {
     const [{ currentSongPlaying }, dispatch] = useDataLayerContextValue();
@@ -36,12 +36,9 @@ function PlayerMoreOptions({ openedFromPlaylist, onClosed }) {
                 autoClose: 3000,
             });
 
-            setCopiedSongLink(false)
+            setCopiedSongLink(false);
         }
-
-
     }, [copiedSongLink]);
-
 
     return (
         <div className="playermoreoptions">
@@ -94,8 +91,22 @@ function PlayerMoreOptions({ openedFromPlaylist, onClosed }) {
             </li>
             <hr className="player__horizontalBar" />
             <li className="player__moreOptionsList" role="presentation">
-                <CopyToClipboard text={openedFromPlaylist ? BASE + "song/" + selectedSongNeedle?.id + "/" + selectedSongNeedle?.title : BASE + "song/" + currentSongPlaying?.id + "/" + currentSongPlaying?.title}
-                    onCopy={() => setCopiedSongLink(true)}>
+                <CopyToClipboard
+                    text={
+                        openedFromPlaylist
+                            ? BASE +
+                            "song?songid=" +
+                            selectedSongNeedle?.id +
+                            "&songTitle=" +
+                            selectedSongNeedle?.title
+                            : BASE +
+                            "song?songid=" +
+                            currentSongPlaying?.id +
+                            "&songTitle=" +
+                            currentSongPlaying?.title
+                    }
+                    onCopy={() => setCopiedSongLink(true)}
+                >
                     <span>Copy Song Link</span>
                 </CopyToClipboard>
             </li>

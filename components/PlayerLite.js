@@ -22,7 +22,7 @@ import ShareDialog from "../components/ShareDialog";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import parse from "html-react-parser";
-import { BASE } from "../configurations/environments";
+import { BASE, SITE_NAME } from "../configurations/environments";
 toast.configure();
 
 export default function PlayerLite({
@@ -97,25 +97,12 @@ export default function PlayerLite({
     }, []);
     const endedMedia = () => {
         console.log("Media ends");
-        if (window.location.href.indexOf("playlist") >= 0) {
-            setUpMeta(
-                featuredPlaylist?.id,
-                featuredPlaylist?.title,
-                featuredPlaylist?.image,
-                featuredPlaylist?.header_desc,
-                "playlist"
-            );
-            return;
-        }
-        if (window.location.href.indexOf("song") >= 0) {
-            setUpMeta(null, null, null, null, "default");
-            return;
-        }
-        setUpMeta(null, null, null, null, "default");
+        document.title = `${SITE_NAME} | ${featuredPlaylist?.title}`;
+
     };
     const onPlay = (e) => {
         console.log("Playing");
-        //setUpMeta(currentSongPlaying?.id, currentSongPlaying?.title, currentSongPlaying?.image, currentSongPlaying?.subtitle, "song")
+
         dispatch({
             type: actionTypes.SET_CURRENT_SONG,
             currentSongPlaying: media,
@@ -128,16 +115,11 @@ export default function PlayerLite({
             type: actionTypes.SET_PAUSED,
             pause: false,
         });
+        document.title = `${SITE_NAME} | ${currentSongPlaying?.title}`;
     };
     const pauseMedia = (e) => {
         console.log("Paused");
-        setUpMeta(
-            currentSongPlaying?.id,
-            currentSongPlaying?.title,
-            currentSongPlaying?.image,
-            currentSongPlaying?.subtitle,
-            "song"
-        );
+
         dispatch({
             type: actionTypes.SET_CURRENT_SONG,
             currentSongPlaying: media,
@@ -150,10 +132,10 @@ export default function PlayerLite({
             type: actionTypes.SET_PAUSED,
             pause: true,
         });
+        document.title = `${SITE_NAME} | ${currentSongPlaying?.title}`;
     };
     const onPlayError = (e) => {
         console.log("Play error");
-        setUpMeta(null, null, null, null, "default");
         opDispatcher({
             type: actionTypes.SET_PLAYING,
             play: false,
@@ -166,50 +148,9 @@ export default function PlayerLite({
     const toggleModal = (event) => {
         updateShowModal((state) => !state);
 
-        if (showModal) {
-            if (currentSongPlaying !== null && (play || pause)) {
-                //song meta
-                setUpMeta(
-                    currentSongPlaying?.id,
-                    currentSongPlaying?.title,
-                    currentSongPlaying?.image,
-                    currentSongPlaying?.subtitle,
-                    "song"
-                );
-            }
-        }
+
     };
 
-    const setUpMeta = (_id, _title, _image, _description, _type) => {
-        if (_type === "default") {
-            metaCurrentUrl(BASE);
-            metaTitle("Enjoy Ad Free Premium Content Music");
-            metaImage(BASE + "static/media/logo.6714a076.png");
-            metaDescription(
-                "Tired of listening to ads and premium subscriptions while streaming music? Well you might like my new music streaming app #musify in this case. Pls visit " +
-                BASE +
-                " for fresh music content ad free. You just need to sign in using your google credentials and enjoy high quality(320, 640, 1080kbps) ad free music."
-            );
-            return;
-        }
-        if (_id && _title && _image && _description && _type) {
-            if (_type === "song") {
-                metaCurrentUrl(BASE + "song/" + _id + "/" + _title);
-                metaTitle(_title);
-                metaImage(_image);
-                metaDescription(_description);
-                return;
-            }
-
-            if (_type === "playlist") {
-                metaCurrentUrl(BASE + "playlist/" + _id + "/" + _title);
-                metaTitle(_title);
-                metaImage(_image);
-                metaDescription(_description);
-                return;
-            }
-        }
-    };
     const openMoreOptionsPopOver = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -261,9 +202,9 @@ export default function PlayerLite({
             <ShareDialog
                 url={
                     BASE +
-                    "song/" +
+                    "song?songid=" +
                     currentSongPlaying?.id +
-                    "/" +
+                    "&songTitle=" +
                     currentSongPlaying?.title
                 }
                 networks={["facebook", "messenger", "whatsapp"]}

@@ -1,7 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState, useRef } from "react";
-import axios from "../configurations/axios";
-import { useParams } from "react-router-dom";
 import { truncate, duration } from "../utils/utility";
 import { useDataLayerContextValue } from "../configurations/DataLayer";
 import { actionTypes } from "../configurations/reducer";
@@ -20,31 +18,19 @@ import PauseCircleFilledRoundedIcon from "@material-ui/icons/PauseCircleFilledRo
 import PlayerMoreOptions from "../components/PlayerMoreOptions";
 import ShareDialog from "../components/ShareDialog";
 import { BASE } from "../configurations/environments"
-import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router"
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 function SongContent({
-    setSearchSuggestionWindowOpened,
-    isIndian,
-    fetchUrl,
-    media,
-    pauseRequested,
-    metaCurrentUrl,
-    metaTitle,
-    metaDescription,
-    metaImage,
-    mediaFavorited
+    playlistSongs,
+    setSearchSuggestionWindowOpened, isIndian, media, pauseRequested, mediaFavorited, metaCurrentUrl, metaTitle, metaDescription, metaImage, tempTitle
 }) {
-    const [playlistSongs, setPlaylistSongs] = useState([]);
-
-    const songid = useParams()?.songid;
-    const songTitle = useParams()?.songtitle;
+    const router = useRouter()
     const [{ featuredPlaylist }, dispatch] = useDataLayerContextValue();
 
     const [{ selectedSongNeedle, pause, play, favorited }, dispatch_v2] =
         useDataLayerContextValue();
-    const history = useHistory();
     const [playing, setPlaying] = useState(false);
     const [paused, setPaused] = useState(false);
     const [currentSong, setCurrentSong] = useState({});
@@ -55,7 +41,9 @@ function SongContent({
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const id = open ? "simple-popover" : undefined;
+
     const playMedia = (song) => {
+        tempTitle(song?.title)
         setCurrentSong(song);
         setPlaying(true);
         setPaused(false);
@@ -63,25 +51,20 @@ function SongContent({
         media(song);
     };
     const pauseMedia = (e) => {
+        tempTitle(currentSong?.title)
         setPlaying(false);
         setPaused(true);
         pauseRequested(true);
     };
     useEffect(() => {
-        const fetchData = async () => {
-            await axios.get(fetchUrl + songid).then((response) => {
-                setPlaylistSongs(response.data);
-                dispatch({
-                    type: actionTypes.SET_CURRENT_SONG,
-                    featuredPlaylist: response.data,
-                });
-                playMedia(response.data);
-                setSearchSuggestionWindowOpened(false);
-                setUpMeta(response.data?.id, response.data?.title, response.data?.image, response.data?.subtitle, "song")
-            });
-        };
-        fetchData();
-    }, [fetchUrl, songid]);
+
+        dispatch({
+            type: actionTypes.SET_CURRENT_SONG,
+            featuredPlaylist: playlistSongs
+        });
+        playMedia(playlistSongs);
+
+    }, [playlistSongs]);
     useEffect(() => {
         if (favorited) {
             setFavoriteSong(true)
@@ -102,48 +85,10 @@ function SongContent({
         }
     }, [pause, play]);
 
-    const setUpMeta = (_id, _title, _image, _description, _type) => {
 
-        if (_type === "default") {
-            metaCurrentUrl(BASE);
-            metaTitle("Enjoy Ad Free Premium Content Music");
-            metaImage(BASE + "static/media/logo.6714a076.png");
-            metaDescription("Tired of listening to ads and premium subscriptions while streaming music? Well you might like my new music streaming app #musify in this case. Pls visit " + BASE + " for fresh music content ad free. You just need to sign in using your google credentials and enjoy high quality(320, 640, 1080kbps) ad free music."
-            );
-            return;
-        }
-        if (_id === undefined || _title === undefined || _image === undefined || _description === undefined) {
-
-            return;
-        }
-
-        if (_id && _title && _image && _description && _type) {
-
-            if (_type === "song") {
-                metaCurrentUrl(BASE + "song/" + _id + "/" + _title);
-                metaTitle(_title);
-                metaImage(_image);
-                metaDescription(_description);
-                return
-            }
-            if (_type === "playlist") {
-
-                metaCurrentUrl(BASE + "playlist/" + _id + "/" + _title);
-                metaTitle(_title);
-                metaImage(_image);
-                metaDescription(_description);
-                return;
-            }
-            return
-        }
-
-    }
     const backHome = (e) => {
         e.preventDefault();
-        if (!playing || currentSong === null) {
-            setUpMeta(null, null, null, null, "default")
-        }
-        history.push("/");
+        router.push("/")
 
     }
 

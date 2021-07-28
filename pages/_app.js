@@ -15,14 +15,20 @@ import "../components/HeaderOption.css";
 import "../components/Row.css";
 import { DataLayer } from "../configurations/DataLayer"
 import reducer, { initialState } from "../configurations/reducer";
+import Layout from "../components/Layout";
+import { UNDER_MAINT, MAINT_MESSAGE, MAINT_TITLE } from "../configurations/environments";
+import Maintenance from "../components/Maintenance";
 
 function MyApp({ Component, pageProps }) {
-    return (<div suppressHydrationWarning><DataLayer initialState={initialState} reducer={reducer}>
-        {typeof window === 'undefined' ? null : <Component {...pageProps} />}
 
-    </DataLayer></div>)
-
-
+    return (
+        UNDER_MAINT ? (<Maintenance message={MAINT_MESSAGE} title={MAINT_TITLE} />) : (
+            <DataLayer initialState={initialState} reducer={reducer}>
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
+            </DataLayer>))
 }
 
 export default MyApp;
+

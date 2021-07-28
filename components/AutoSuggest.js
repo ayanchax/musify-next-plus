@@ -1,15 +1,29 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react'
 import { truncate, noImage, capitalizeFirstLetter } from "../utils/utility";
-
+import { useRouter } from "next/router"
 import parse from "html-react-parser"
-import { Link } from "react-router-dom";
+
 
 function AutoSuggest({ songSuggestions, playlistsSuggestions, albumsSuggestion, topArtistsSuggestions }) {
+    const router = useRouter()
+    const navigateTo = (e, object, _type) => {
+        e.preventDefault();
 
+        if (_type === "playlist") {
+            router.push(`/playlist?playlistid=${object?.id}&playlistTitle=${object?.title}`)
+            return
+        }
+
+        if (_type === "song") {
+            router.push(`/song?songid=${object?.id}&songTitle=${object?.title}`)
+            return
+        }
+
+    }
     return (
         <div>
-            <div className="suggestBox w-full  z-30 h-auto lg:text-lg md:text-sm text-xs  text-black">
+            <div className="suggestBox w-full  z-30 h-auto lg:text-lg md:text-sm text-xs  text-black absolute">
                 {songSuggestions?.length > 0 && (
                     <div
                         className="text-gray-300 antialiased 
@@ -21,7 +35,7 @@ function AutoSuggest({ songSuggestions, playlistsSuggestions, albumsSuggestion, 
                 {/* SONGS RESULTS */}
                 <div className=" suggestBox__songs grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     {songSuggestions?.map((songSuggestion, index) => (
-                        <Link key={songSuggestion?.id} to={`/song/${songSuggestion?.id}/${songSuggestion?.title}`}
+                        <a key={songSuggestion?.id} href="#" onClick={(e) => navigateTo(e, songSuggestion, "song")}
                             title={parse(songSuggestion?.title)}
                             className="px-2 py-1 font-sans  flex flex-grow cursor-pointer group 
                           hover:bg-blue-600"
@@ -50,7 +64,7 @@ function AutoSuggest({ songSuggestions, playlistsSuggestions, albumsSuggestion, 
                                     {capitalizeFirstLetter(songSuggestion?.more_info?.language)}
                                 </div>
                             </div>
-                        </Link>
+                        </a>
                     ))}
                 </div>
                 {/* PLAYLIST RESULTS */}
@@ -65,7 +79,7 @@ function AutoSuggest({ songSuggestions, playlistsSuggestions, albumsSuggestion, 
 
                 <div className=" suggestBox__playlists grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 font-sans ">
                     {playlistsSuggestions?.map((playlistSuggestion, index) => (
-                        <Link to={`/playlist/${playlistSuggestion?.id}/${playlistSuggestion?.title}`}
+                        <a href="#" onClick={(e) => navigateTo(e, playlistSuggestion, "playlist")}
                             title={parse(playlistSuggestion?.title)}
                             className="px-2 py-1 font-sans flex flex-grow cursor-pointer group   hover:bg-blue-600 "
                             key={playlistSuggestion?.id}
@@ -97,7 +111,7 @@ function AutoSuggest({ songSuggestions, playlistsSuggestions, albumsSuggestion, 
                                     </div>
                                 )}
                             </div>
-                        </Link>
+                        </a>
                     ))}
                 </div>
 
