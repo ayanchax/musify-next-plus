@@ -32,6 +32,8 @@ export default function Home({ searchSuggestionWindow }) {
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
         <meta name="csrf_token" content="" />
         <meta property="type" content="website" />
         <meta property="url" content={SITE_HOME_URL} />
@@ -54,6 +56,7 @@ export default function Home({ searchSuggestionWindow }) {
         />
         <meta name="description" content={SITE_DESC} />
         <meta property="image" content={SITE_IMAGE} />
+
         <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="website" />
         <meta
@@ -66,11 +69,24 @@ export default function Home({ searchSuggestionWindow }) {
         />
         <meta property="og:hashtag" content={SITE_HASH} />
         <meta property="og:image" content={SITE_IMAGE} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:url" content={SITE_HOME_URL} />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta property="og:description" content={SITE_DESC} />
         <meta content="image/*" property="og:image:type" />
         <meta property="fb:app_id" content={FB_APP_ID} />
+
+        <meta name="twitter:card" content={SITE_DESC} />
+        <meta name="twitter:site" content={SITE_NAME} />
+        <meta name="twitter:url" content={window.location.href} />
+        <meta name="twitter:title" content={_title === SITE_TITLE
+          ? SITE_TITLE
+          : `${SITE_NAME} | ${parse(_title)}`} />
+        <meta name="twitter:description" content={SITE_DESC} />
+        <meta name="twitter:image" content={SITE_IMAGE} />
+        <meta name="twitter:image:width" content="1024" />
+        <meta name="twitter:image:height" content="512" />
       </Head>
       <div className="app home">
         <Landing setSearchSuggestionWindowOpened={searchSuggestionWindow} />
