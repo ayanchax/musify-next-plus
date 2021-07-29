@@ -8,7 +8,11 @@ function Row({ title, fetchUrl, seeMoreOfThis }) {
     const router = useRouter()
     useEffect(() => {
         async function fetchData() {
-            const request = await axios.get(fetchUrl).then((response) => {
+            const request = await axios.get(fetchUrl, {
+                rejectUnauthorized: false,
+                requestCert: true,
+                agent: false
+            }).then((response) => {
                 setPlaylists(response?.data);
             }).catch((error) => {
                 console.log(error.message)
