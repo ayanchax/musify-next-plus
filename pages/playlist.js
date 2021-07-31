@@ -25,6 +25,7 @@ function Playlist({
     const router = useRouter();
     const [{ play, currentSongPlaying }, dispatch] = useDataLayerContextValue();
     const playlistTitle = router.query?.playlistTitle;
+    const playlistid = router.query?.playlistid;
     const [_title, _setTempTitle] = useState(playlistTitle);
 
     useEffect(() => {
@@ -44,7 +45,7 @@ function Playlist({
                         : `${SITE_NAME} | ${parse(_title)}`}
                 </title>
                 <link rel="icon" href="/favicon.ico" />
-                <link rel="canonical" href={window.location.href} />
+                <link rel="canonical" href={`https://musify-plus.vercel.app/playlist?playlistid=${playlistid}&playlistTitle=${playlistTitle}`} />
                 <meta charSet="utf-8" />
                 <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -52,7 +53,7 @@ function Playlist({
                 <meta name="MobileOptimized" content="320" />
                 <meta name="csrf_token" content="" />
                 <meta property="type" content="website" />
-                <meta property="url" content={window.location.href} />
+                <meta property="url" content={`https://musify-plus.vercel.app/playlist?playlistid=${playlistid}&playlistTitle=${playlistTitle}`} />
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -85,7 +86,7 @@ function Playlist({
                 <meta property="og:image" content={results?.image} />
                 <meta property="og:image:width" content="1200" />
                 <meta property="og:image:height" content="630" />
-                <meta property="og:url" content={window.location.href} />
+                <meta property="og:url" content={`https://musify-plus.vercel.app/playlist?playlistid=${playlistid}&playlistTitle=${playlistTitle}`} />
                 <meta property="og:site_name" content={SITE_NAME} />
                 <meta property="og:description" content={results?.header_desc} />
                 <meta property="og:hashtag" content={SITE_HASH} />
@@ -93,7 +94,7 @@ function Playlist({
                 <meta property="fb:app_id" content={FB_APP_ID} />
                 <meta name="twitter:card" content={results?.header_desc} />
                 <meta name="twitter:site" content={SITE_NAME} />
-                <meta name="twitter:url" content={window.location.href} />
+                <meta name="twitter:url" content={`https://musify-plus.vercel.app/playlist?playlistid=${playlistid}&playlistTitle=${playlistTitle}`} />
                 <meta name="twitter:title" content={_title === playlistTitle
                     ? playlistTitle
                     : `${SITE_NAME} | ${parse(_title)}`} />
