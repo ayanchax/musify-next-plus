@@ -1,6 +1,7 @@
 .app__body {}
 
-.app {
+.app,
+.app__layout {
     min-height: 100%;
     display: block;
     position: relative;
