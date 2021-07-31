@@ -35,28 +35,12 @@ export default function Home({ searchSuggestionWindow }) {
         <meta name="HandheldFriendly" content="True" />
         <meta name="MobileOptimized" content="320" />
         <meta name="csrf_token" content="" />
-        <meta property="type" content="website" />
-        <meta property="url" content={SITE_HOME_URL} />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
         <meta name="theme-color" content="#ffffff" />
         <meta name="_token" content="" />
         <meta name="robots" content="noodp" />
-        <meta
-          property="title"
-          content={
-            _title === SITE_TITLE
-              ? SITE_TITLE
-              : `${SITE_NAME} | ${parse(_title)}`
-          }
-        />
-        <meta name="description" content={SITE_DESC} />
-        <meta property="image" content={SITE_IMAGE} />
-
+        
         <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="website" />
         <meta
@@ -71,10 +55,11 @@ export default function Home({ searchSuggestionWindow }) {
         <meta property="og:image" content={SITE_IMAGE} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta content="image/*" property="og:image:type" />
         <meta property="og:url" content={SITE_HOME_URL} />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta property="og:description" content={SITE_DESC} />
-        <meta content="image/*" property="og:image:type" />
+       
         <meta property="fb:app_id" content={FB_APP_ID} />
 
         <meta name="twitter:card" content={SITE_DESC} />

@@ -52,27 +52,11 @@ function Playlist({
                 <meta name="HandheldFriendly" content="True" />
                 <meta name="MobileOptimized" content="320" />
                 <meta name="csrf_token" content="" />
-                <meta property="type" content="website" />
-                <meta property="url" content={`https://musify-plus.vercel.app/playlist?playlistid=${playlistid}&playlistTitle=${playlistTitle}`} />
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1, shrink-to-fit=no"
-                />
                 <meta name="msapplication-TileColor" content="#ffffff" />
                 <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
                 <meta name="theme-color" content="#ffffff" />
                 <meta name="_token" content="" />
                 <meta name="robots" content="noodp" />
-                <meta
-                    property="title"
-                    content={
-                        _title === playlistTitle
-                            ? playlistTitle
-                            : `${SITE_NAME} | ${parse(_title)}`
-                    }
-                />
-                <meta name="description" content={results?.header_desc} />
-                <meta property="image" content={results?.image} />
                 <meta property="og:locale" content="en_US" />
                 <meta property="og:type" content="website" />
                 <meta
@@ -86,11 +70,11 @@ function Playlist({
                 <meta property="og:image" content={results?.image} />
                 <meta property="og:image:width" content="1200" />
                 <meta property="og:image:height" content="630" />
+                <meta content="image/*" property="og:image:type" />
                 <meta property="og:url" content={`https://musify-plus.vercel.app/playlist?playlistid=${playlistid}&playlistTitle=${playlistTitle}`} />
                 <meta property="og:site_name" content={SITE_NAME} />
                 <meta property="og:description" content={results?.header_desc} />
                 <meta property="og:hashtag" content={SITE_HASH} />
-                <meta content="image/*" property="og:image:type" />
                 <meta property="fb:app_id" content={FB_APP_ID} />
                 <meta name="twitter:card" content={results?.header_desc} />
                 <meta name="twitter:site" content={SITE_NAME} />
