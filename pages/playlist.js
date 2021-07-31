@@ -44,6 +44,7 @@ function Playlist({
                         : `${SITE_NAME} | ${parse(_title)}`}
                 </title>
                 <link rel="icon" href="/favicon.ico" />
+                <link rel="canonical" href={window.location.href} />
                 <meta charSet="utf-8" />
                 <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />

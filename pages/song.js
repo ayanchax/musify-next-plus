@@ -27,6 +27,7 @@ function Song({ results, media, pauseMedia, favoriteMedia, metaCurrentUrl, metaT
             <Head>
                 <title>{_title === songTitle ? songTitle : `${SITE_NAME} | ${parse(_title)}`}</title>
                 <link rel="icon" href="/favicon.ico" />
+
                 <meta charSet="utf-8" />
                 <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
