@@ -10,6 +10,7 @@ import {
 import { ASYNC_CALLER_URL } from "../configurations/endpoint";
 import parse from "html-react-parser";
 import { useDataLayerContextValue } from "../configurations/DataLayer";
+import { truncate } from "../utils/utility"
 
 function Playlist({
     results,
@@ -76,13 +77,14 @@ function Playlist({
                 <meta property="og:description" content={results?.header_desc} />
                 <meta property="og:hashtag" content={SITE_HASH} />
                 <meta property="fb:app_id" content={FB_APP_ID} />
-                <meta name="twitter:card" content={results?.header_desc} />
+
+                <meta name="twitter:card" content="summary" />
                 <meta name="twitter:site" content={SITE_NAME} />
                 <meta name="twitter:url" content={`https://musify-plus.vercel.app/playlist?playlistid=${playlistid}&playlistTitle=${playlistTitle}`} />
                 <meta name="twitter:title" content={_title === playlistTitle
                     ? playlistTitle
                     : `${SITE_NAME} | ${parse(_title)}`} />
-                <meta name="twitter:description" content={results?.header_desc} />
+                <meta name="twitter:description" content={truncate(results?.header_desc, 100)} />
                 <meta name="twitter:image" content={results?.image} />
                 <meta name="twitter:image:width" content="1024" />
                 <meta name="twitter:image:height" content="512" />

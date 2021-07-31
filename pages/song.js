@@ -6,7 +6,7 @@ import { SITE_NAME, SITE_HASH, FB_APP_ID } from "../configurations/environments"
 import { ASYNC_CALLER_URL } from "../configurations/endpoint";
 import parse from "html-react-parser";
 import { useDataLayerContextValue } from "../configurations/DataLayer";
-
+import { truncate } from "../utils/utility"
 function Song({ results, media, pauseMedia, favoriteMedia, metaCurrentUrl, metaTitle, metaDescription, metaImage, searchSuggestionWindow }) {
     const router = useRouter()
     const [{ play, currentSongPlaying }, dispatch] = useDataLayerContextValue();
@@ -52,14 +52,17 @@ function Song({ results, media, pauseMedia, favoriteMedia, metaCurrentUrl, metaT
                 <meta property="og:description" content={results?.subtitle} />
                 <meta property="og:hashtag" content={SITE_HASH} />
                 <meta property="fb:app_id" content={FB_APP_ID} />
-                <meta name="twitter:card" content={results?.subtitle} />
+
+
+                <meta name="twitter:card" content="summary" />
                 <meta name="twitter:site" content={SITE_NAME} />
                 <meta name="twitter:url" content={`https://musify-plus.vercel.app/song?songid=${songid}&songTitle=${songTitle}`} />
                 <meta name="twitter:title" content={_title === songTitle ? songTitle : `${SITE_NAME} | ${parse(_title)}`} />
-                <meta name="twitter:description" content={results?.subtitle} />
+                <meta name="twitter:description" content={truncate(results?.subtitle, 100)} />
                 <meta name="twitter:image" content={results?.image} />
                 <meta name="twitter:image:width" content="1024" />
                 <meta name="twitter:image:height" content="512" />
+
             </Head>
             <div className="playlist__container">
                 {results && (

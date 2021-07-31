@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import Landing from "../components/Landing";
+import { truncate } from "../utils/utility"
 import {
   SITE_NAME,
   SITE_TITLE,
@@ -40,7 +41,7 @@ export default function Home({ searchSuggestionWindow }) {
         <meta name="theme-color" content="#ffffff" />
         <meta name="_token" content="" />
         <meta name="robots" content="noodp" />
-        
+
         <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="website" />
         <meta
@@ -59,16 +60,16 @@ export default function Home({ searchSuggestionWindow }) {
         <meta property="og:url" content={SITE_HOME_URL} />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta property="og:description" content={SITE_DESC} />
-       
+
         <meta property="fb:app_id" content={FB_APP_ID} />
 
-        <meta name="twitter:card" content={SITE_DESC} />
+        <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content={SITE_NAME} />
         <meta name="twitter:url" content={window.location.href} />
         <meta name="twitter:title" content={_title === SITE_TITLE
           ? SITE_TITLE
           : `${SITE_NAME} | ${parse(_title)}`} />
-        <meta name="twitter:description" content={SITE_DESC} />
+        <meta name="twitter:description" content={truncate(SITE_DESC, 100)} />
         <meta name="twitter:image" content={SITE_IMAGE} />
         <meta name="twitter:image:width" content="1024" />
         <meta name="twitter:image:height" content="512" />
