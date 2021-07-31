@@ -1,4 +1,4 @@
-export const ENV = "prod";
+export const ENV = "prod"
 export const BASE = "https://musify-plus.vercel.app/";
 export const UNDER_MAINT = false;
 export const MAINT_MESSAGE = "Site is under maintenance";
