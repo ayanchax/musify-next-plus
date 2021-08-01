@@ -5,7 +5,7 @@ function PlaylistCategories({ categoryMap }) {
     return (
         <div>
             <div className="playlist__categories">
-                {categoryMap?.indianCategory.map((category) => (
+                {categoryMap?.indianCategory?.map((category) => (
                     <div key={category?.key}>
                         <Row
                             title={category?.key}
@@ -15,7 +15,7 @@ function PlaylistCategories({ categoryMap }) {
                 ))}
 
 
-                {categoryMap?.westernPopularCategory.map((category) => (
+                {categoryMap?.westernPopularCategory?.map((category) => (
                     <div key={category?.key}>
                         <Row
                             title={category?.key}
@@ -24,7 +24,7 @@ function PlaylistCategories({ categoryMap }) {
                     </div>
                 ))}
 
-                {categoryMap?.westernRockCategory.map((category) => (
+                {categoryMap?.westernRockCategory?.map((category) => (
                     <div key={category?.key}>
                         <Row
                             title={category?.key}
@@ -34,7 +34,7 @@ function PlaylistCategories({ categoryMap }) {
                 ))}
 
 
-                {categoryMap?.moodCategory.map((category) => (
+                {categoryMap?.moodCategory?.map((category) => (
                     <div key={category?.key}>
                         <Row
                             title={category?.key}
