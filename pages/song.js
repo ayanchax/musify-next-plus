@@ -7,7 +7,7 @@ import { ASYNC_CALLER_URL } from "../configurations/endpoint";
 import parse from "html-react-parser";
 import { useDataLayerContextValue } from "../configurations/DataLayer";
 import { truncate } from "../utils/utility"
-function Song({ results, media, pauseMedia, favoriteMedia, metaCurrentUrl, metaTitle, metaDescription, metaImage, searchSuggestionWindow }) {
+function Song({ results, media, pauseMedia, favoriteMedia, metaCurrentUrl, metaTitle, metaDescription, metaImage, searchSuggestionWindow, setPlayerMinimized }) {
     const router = useRouter()
     const [{ play, currentSongPlaying }, dispatch] = useDataLayerContextValue();
     const songTitle = router.query?.songTitle;
@@ -74,6 +74,7 @@ function Song({ results, media, pauseMedia, favoriteMedia, metaCurrentUrl, metaT
                         mediaFavorited={favoriteMedia}
                         metaCurrentUrl={metaCurrentUrl} metaTitle={metaTitle} metaDescription={metaDescription} metaImage={metaImage}
                         tempTitle={_setTempTitle}
+                        setPlayerMinimized={setPlayerMinimized}
                     />)}
             </div>
         </div>

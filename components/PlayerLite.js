@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, ReactDOM } from "react";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import AudioPlayer, { RHAP_UI } from "react-h5-audio-player";
 import { v4 as uuidv4 } from "uuid";
@@ -23,6 +23,8 @@ import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import parse from "html-react-parser";
 import { BASE, SITE_NAME } from "../configurations/environments";
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 toast.configure();
 
 export default function PlayerLite({
@@ -34,6 +36,7 @@ export default function PlayerLite({
     metaTitle,
     metaDescription,
     metaImage,
+    playerMinimized
 }) {
     const playerObject = useRef(null);
     const [{ }, dispatch] = useDataLayerContextValue();
@@ -45,10 +48,15 @@ export default function PlayerLite({
     const [showModal, updateShowModal] = useState(false);
     const [autoPlayAfterSrcChange, setAutoPlayAfterSrcChange] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
+    const playerControls = [RHAP_UI.ADDITIONAL_CONTROLS, RHAP_UI.MAIN_CONTROLS, RHAP_UI.VOLUME_CONTROLS]
+    const playerProgressBarControls = [RHAP_UI.CURRENT_TIME, RHAP_UI.PROGRESS_BAR, RHAP_UI.DURATION];
+    const [statePlayerControls, setStatePlayerControls] = useState(playerControls);
+    const [statePlayerProgressBarControls, setStatePlayerProgressBarControls] = useState(playerProgressBarControls);
+    const [_playerMinimized, setPlayerMinimized] = useState(playerMinimized)
     const open = Boolean(anchorEl);
     const id = open ? "simple-popover" : undefined;
     useEffect(() => {
-        console.log(media);
+
         if (isMediaPaused) {
             //pause requested
             playerObject.current.audio.current.pause();
@@ -80,6 +88,12 @@ export default function PlayerLite({
     useEffect(() => {
         setFavorite(isMediaAFavorite);
     }, [isMediaAFavorite]);
+
+
+    useEffect(() => {
+        setPlayerMinimized(playerMinimized);
+    }, [playerMinimized]);
+
 
     useEffect(() => {
         opDispatcher({
@@ -197,6 +211,21 @@ export default function PlayerLite({
         }
     };
 
+    const togglePlayer = (e, _action) => {
+
+        if (_action === "hide") {
+            setStatePlayerProgressBarControls([])
+            setStatePlayerControls([])
+            setPlayerMinimized(true)
+        }
+        else {
+            setStatePlayerProgressBarControls(playerProgressBarControls)
+            setStatePlayerControls(playerControls)
+            setPlayerMinimized(false)
+        }
+
+    }
+
     return (
         <div className="player__lite">
             <ShareDialog
@@ -249,6 +278,8 @@ export default function PlayerLite({
                     onSuspend={(e) => console.log("Suspended")}
                     onWaiting={(e) => console.log("Waiting")}
                     onVolumeChange={(e) => console.log("Volume Changed")}
+                    customControlsSection={_playerMinimized ? [] : statePlayerControls}
+                    customProgressBarSection={_playerMinimized ? [] : statePlayerProgressBarControls}
                     customAdditionalControls={[RHAP_UI.LOOP]}
                     header={
                         <div>
@@ -390,6 +421,17 @@ export default function PlayerLite({
                                                     </NativeSelect>
                                                 </div>
                                             </div>
+
+                                            <div className="text-xs px-1 py-1 cursor-pointer">
+
+                                                {!_playerMinimized && (
+                                                    <ArrowDropDownIcon size={4} onClick={(e) => togglePlayer(e, "hide")} />)}
+
+                                                {_playerMinimized && (
+                                                    <ArrowDropUpIcon size={4} onClick={(e) => togglePlayer(e, "show")} />)}
+                                            </div>
+
+
                                         </div>
                                     </div>
                                 )}

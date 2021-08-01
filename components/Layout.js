@@ -25,6 +25,7 @@ const Layout = ({ children, ...pageProps }) => {
     const [mediaObject, setMediaObject] = useState(null);
     const [mediaPaused, setMediaPaused] = useState(false);
     const [mediaFavorite, setMediaFavorite] = useState(false);
+    const [playerMinimized, setPlayerMinimized] = useState(false)
 
     const initiateMediaObject = (_mediaObject) => {
         setMediaObject(_mediaObject);
@@ -109,7 +110,8 @@ const Layout = ({ children, ...pageProps }) => {
                     metaTitle: setTitle,
                     metaDescription: setDescription,
                     metaImage: setImage,
-                    searchSuggestionWindow: setSearchSuggestionWindowOpened
+                    searchSuggestionWindow: setSearchSuggestionWindowOpened,
+                    setPlayerMinimized: setPlayerMinimized
                 })
             }
             <PlayerLite
@@ -123,6 +125,7 @@ const Layout = ({ children, ...pageProps }) => {
                 metaTitle={setTitle}
                 metaDescription={setDescription}
                 metaImage={setImage}
+                playerMinimized={playerMinimized}
             />
         </div>
     );

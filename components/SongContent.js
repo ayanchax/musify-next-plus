@@ -24,7 +24,7 @@ import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 function SongContent({
     playlistSongs,
-    setSearchSuggestionWindowOpened, isIndian, media, pauseRequested, mediaFavorited, metaCurrentUrl, metaTitle, metaDescription, metaImage, tempTitle
+    setSearchSuggestionWindowOpened, isIndian, media, pauseRequested, mediaFavorited, metaCurrentUrl, metaTitle, metaDescription, metaImage, tempTitle, setPlayerMinimized
 }) {
     const router = useRouter()
     const [{ featuredPlaylist }, dispatch] = useDataLayerContextValue();
@@ -89,7 +89,9 @@ function SongContent({
     const backHome = (e) => {
         e.preventDefault();
         router.push("/")
-
+        if ((play || pause) && currentSong !== null) {
+            setPlayerMinimized(true)
+        }
     }
 
     const OnSongNeedleSelected = (event, playListSong) => {

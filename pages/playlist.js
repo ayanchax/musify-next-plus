@@ -22,6 +22,7 @@ function Playlist({
     metaDescription,
     metaImage,
     searchSuggestionWindow,
+    setPlayerMinimized
 }) {
     const router = useRouter();
     const [{ play, currentSongPlaying }, dispatch] = useDataLayerContextValue();
@@ -102,6 +103,7 @@ function Playlist({
                         metaDescription={metaDescription}
                         metaImage={metaImage}
                         tempTitle={_setTempTitle}
+                        setPlayerMinimized={setPlayerMinimized}
                     />
                 )}
             </div>

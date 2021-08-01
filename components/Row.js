@@ -19,7 +19,7 @@ function Row({ title, contents }) {
         }
 
     }
-    if (playlists?.length > 0) {
+    if (playlists && playlists?.length > 0) {
         return (
             <div className="font-bold text-gray-100 font-sans ml-5 ">
                 <header className="text-sm md:text-lg lg:text-lg sm:text-sm antialiased sm:subpixel-antialiased md:antialiased">

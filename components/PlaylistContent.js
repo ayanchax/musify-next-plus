@@ -27,7 +27,8 @@ import { useRouter } from "next/router"
 
 toast.configure();
 
-function PlaylistContent({ playlistSongs, setSearchSuggestionWindowOpened, isIndian, media, pauseRequested, mediaFavorited, metaCurrentUrl, metaTitle, metaDescription, metaImage, tempTitle }) {
+function PlaylistContent({ playlistSongs, setSearchSuggestionWindowOpened, isIndian, media, pauseRequested, mediaFavorited, metaCurrentUrl, metaTitle, metaDescription,
+    metaImage, tempTitle, setPlayerMinimized }) {
     const router = useRouter()
     const [{ selectedSongNeedle, favoriteSongsInPlaylist, pause, play, favorited }, dispatch_v2] = useDataLayerContextValue();
     const [playing, setPlaying] = useState(false);
@@ -233,6 +234,9 @@ function PlaylistContent({ playlistSongs, setSearchSuggestionWindowOpened, isInd
     const backHome = (e) => {
         e.preventDefault();
         router.push("/")
+        if ((play || pause) && currentSong !== null) {
+            setPlayerMinimized(true)
+        }
 
     }
     return playlistSongs && (<div className="content" onClick={(e) => setSearchSuggestionWindowOpened(false)}>
