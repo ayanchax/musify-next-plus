@@ -279,7 +279,7 @@ export default function PlayerLite({
                     onWaiting={(e) => console.log("Waiting")}
                     onVolumeChange={(e) => console.log("Volume Changed")}
                     customControlsSection={_playerMinimized ? [] : statePlayerControls}
-                    customProgressBarSection={_playerMinimized ? [] : statePlayerProgressBarControls}
+                    // customProgressBarSection={_playerMinimized ? [] : statePlayerProgressBarControls}
                     customAdditionalControls={[RHAP_UI.LOOP]}
                     header={
                         <div>

@@ -7,6 +7,8 @@ import { ASYNC_CALLER_URL } from "../configurations/endpoint";
 import parse from "html-react-parser";
 import { useDataLayerContextValue } from "../configurations/DataLayer";
 import { truncate } from "../utils/utility"
+import cache from "memory-cache";
+
 function Song({ results, media, pauseMedia, favoriteMedia, metaCurrentUrl, metaTitle, metaDescription, metaImage, searchSuggestionWindow, setPlayerMinimized }) {
     const router = useRouter()
     const [{ play, currentSongPlaying }, dispatch] = useDataLayerContextValue();
@@ -26,7 +28,7 @@ function Song({ results, media, pauseMedia, favoriteMedia, metaCurrentUrl, metaT
     return (
         <div className="playlist__wrapper">
             <Head>
-                <title>{_title === songTitle ? songTitle : `${SITE_NAME} | ${parse(_title)}`}</title>
+                <title>{_title === songTitle ? `${SITE_NAME} | ${songTitle}` : `${SITE_NAME} | ${parse(_title)}`}</title>
                 <link rel="icon" href="/favicon.ico" />
                 <link rel="canonical" href={`https://musify-plus.vercel.app/song?songid=${songid}&songTitle=${songTitle}`} />
                 <meta charSet="utf-8" />
@@ -88,7 +90,23 @@ export default Song
 // getServerSideProps is a SSR function in built in next js
 // this method is asynchronously called whenever the route is routed to Search
 export async function getServerSideProps(context) {
-    const data = await fetch(ASYNC_CALLER_URL() + `song?songid=${context.query?.songid}`).then(response => response.json())
+    const cachedFetch = async (url) => {
+        const cachedResponse = cache.get(url);
+        if (cachedResponse) {
+            console.log("Cached")
+            return cachedResponse;
+        } else {
+            console.log("New")
+            const hours = 4;
+            const response = await fetch(url);
+            const data = await response.json();
+            cache.put(url, data, hours * 1000 * 60 * 60);
+            return data;
+        }
+    };
+
+
+    const data = await cachedFetch(ASYNC_CALLER_URL() + `song?songid=${context.query?.songid}`).then((response) => response);
     // After the server has rendered, pass result to client side by wrapping it in inbuilt-key props
     return {
         props: {
