@@ -27,7 +27,7 @@ const SongCredit = ({ songData }) => {
                     <div className="songcredit__artist">
                         <h4 className="songcredit__header">Artists</h4>
                         <div className="grid grid-cols-2">
-                            {songData?.more_info?.artistMap?.artists.map((artist, i) => (
+                            {songData?.more_info?.artistMap?.artists?.map((artist, i) => (
                                 <div className="flex space-x-1 px-1 py-1" key={artist.id}>
                                     <img className="w-6 h-6 rounded-full " src={artist.image} />
                                     <a className=" text-blue-400 hover:text-gray-100" href={artist.perma_url}>{parse(artist.name)}</a></div>
