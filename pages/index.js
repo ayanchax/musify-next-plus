@@ -125,7 +125,7 @@ export async function getServerSideProps(context) {
   });
 
   let westernRockCategoryPromise = []
-  let _westernRockCategoryData = categoryMap?.WESTERN[0]?.ROCK.map(async (category) => {
+  let _westernRockCategoryData = categoryMap?.WESTERN[0]?.ROCK?.map(async (category) => {
     const res = await cachedFetch(ASYNC_CALLER_URL() + category?.url)
     westernRockCategoryPromise = { key: category.title, value: res };
     return westernRockCategoryPromise
@@ -133,7 +133,7 @@ export async function getServerSideProps(context) {
   });
 
   let westernPopularCategoryPromise = []
-  let _westernPopularCategoryData = categoryMap?.WESTERN[1]?.OTHERS.map(async (category) => {
+  let _westernPopularCategoryData = categoryMap?.WESTERN[1]?.OTHERS?.map(async (category) => {
     const res = await cachedFetch(ASYNC_CALLER_URL() + category?.url)
     westernPopularCategoryPromise = { key: category.title, value: res };
     return westernPopularCategoryPromise
