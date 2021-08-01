@@ -2,7 +2,7 @@ import React from "react";
 import Band from "./Band";
 
 function Bands({ genre, isIndian, data }) {
-    if (data?.length > 0) {
+    if (data && data?.length > 0) {
         return (
             <div className="artists">
                 <div className="flex flex-grow">

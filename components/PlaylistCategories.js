@@ -1,9 +1,8 @@
 import Row from "./Row";
 
 function PlaylistCategories({ categoryMap }) {
-
-    return (
-        <div>
+    if (categoryMap && categoryMap.length > 0) {
+        return (<div>
             <div className="playlist__categories">
                 {categoryMap?.indianCategory?.map((category) => (
                     <div key={category?.key}>
@@ -47,7 +46,8 @@ function PlaylistCategories({ categoryMap }) {
             </div>
 
         </div>
-    );
+        );
+    } else return ""
 }
 
 export default PlaylistCategories;

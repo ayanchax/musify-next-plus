@@ -17,7 +17,7 @@ function Artists({ genre, isIndian, data, seeMoreIconText }) {
             setSeeMoreText("See Less");
         }
     };
-    if (data?.length > 0) {
+    if (data && data?.length > 0) {
         return (
             <div className="artists">
                 <div className="flex flex-grow">

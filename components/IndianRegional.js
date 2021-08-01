@@ -1,6 +1,6 @@
 import React from 'react'
 function IndianRegional({ data }) {
-    if (data?.length > 0) {
+    if (data && data?.length > 0) {
         return (
 
             <div className="regional">
