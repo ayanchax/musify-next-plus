@@ -1,7 +1,7 @@
 import Row from "./Row";
 
 function PlaylistCategories({ categoryMap }) {
-    if (categoryMap && categoryMap.length > 0) {
+    if (categoryMap) {
         return (<div>
             <div className="playlist__categories">
                 {categoryMap?.indianCategory?.map((category) => (
