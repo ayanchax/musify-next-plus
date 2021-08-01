@@ -10,7 +10,7 @@ function IndianRegional({ data }) {
                 </div>
 
                 <div className="lg:-mt-14 md:-mt-5 -mt-12 grid grid-cols-4 md:grid-cols-4 lg:grid-cols-4 ml-3 lg:ml-2">
-                    {data.map((needle, index) => (
+                    {data?.map((needle, index) => (
 
                         <div key={needle.title} className=" align-top inline-block text-center w-20 mt-10 md:mt-1 lg:mt-10 md:w-28 lg:w-48  lg:px-2 lg:py-2 cursor-pointer ">
                             <img className=" cursor-pointer rounded-full

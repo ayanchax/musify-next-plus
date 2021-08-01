@@ -12,7 +12,7 @@ function Bands({ genre, isIndian, data }) {
                 </div>
 
                 <div className=" -mt-5  lg:-mt-14 md:-mt-5 grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 ml-3 lg:-ml-10">
-                    {data.map((needle, index) => (
+                    {data?.map((needle, index) => (
                         <Band
                             name={needle.name}
                             url={needle.url}
