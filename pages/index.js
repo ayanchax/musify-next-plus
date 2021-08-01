@@ -2,6 +2,7 @@ import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import Landing from "../components/Landing";
 import { truncate } from "../utils/utility"
+import { ASYNC_CALLER_URL } from "../configurations/endpoint";
 import {
   SITE_NAME,
   SITE_TITLE,
@@ -13,7 +14,11 @@ import {
 } from "../configurations/environments";
 import { useDataLayerContextValue } from "../configurations/DataLayer";
 import parse from "html-react-parser";
-export default function Home({ searchSuggestionWindow }) {
+import { categories } from "../configurations/requests";
+import cache from "memory-cache";
+
+export default function Home({ boilerPlate, indianCategory, westernPopularCategory, westernRockCategory, moodCategory, searchSuggestionWindow }) {
+
   const [{ play, currentSongPlaying }, dispatch] = useDataLayerContextValue();
   const [_title, _setTempTitle] = useState(SITE_TITLE);
   useEffect(() => {
@@ -75,8 +80,92 @@ export default function Home({ searchSuggestionWindow }) {
         <meta name="twitter:image:height" content="512" />
       </Head>
       <div className="app home">
-        <Landing setSearchSuggestionWindowOpened={searchSuggestionWindow} />
+        <Landing boilerPlateResults={boilerPlate}
+          indianCategory={indianCategory}
+          westernPopularCategory={westernPopularCategory}
+          westernRockCategory={westernRockCategory}
+          moodCategory={moodCategory}
+          setSearchSuggestionWindowOpened={searchSuggestionWindow} />
       </div>
     </div>
   );
+}
+
+// getServerSideProps is a SSR function in built in next js
+// this method is asynchronously called whenever the route is routed to Search
+export async function getServerSideProps(context) {
+
+  const cachedFetch = async (url) => {
+    const cachedResponse = cache.get(url);
+    if (cachedResponse) {
+      console.log("Cached")
+      return cachedResponse;
+    } else {
+      console.log("New")
+      const hours = 2;
+      const response = await fetch(url);
+      const data = await response.json();
+      cache.put(url, data, hours * 1000 * 60 * 60);
+      return data;
+    }
+  };
+  const categoriesData = categories;
+  const categoryMap = {
+    INDIAN: categoriesData[0].INDIAN,
+    WESTERN: categoriesData[0].WESTERN,
+    MOOD: categoriesData[0].MOOD,
+  };
+
+  let indianCategoryPromise = []
+  let _indianCategoryData = categoryMap.INDIAN.map(async (category) => {
+    const res = await cachedFetch(ASYNC_CALLER_URL() + category?.url)
+    indianCategoryPromise = { key: category.title, value: res };
+    return indianCategoryPromise
+
+  });
+
+  let westernRockCategoryPromise = []
+  let _westernRockCategoryData = categoryMap.WESTERN[0].ROCK.map(async (category) => {
+    const res = await cachedFetch(ASYNC_CALLER_URL() + category?.url)
+    westernRockCategoryPromise = { key: category.title, value: res };
+    return westernRockCategoryPromise
+
+  });
+
+  let westernPopularCategoryPromise = []
+  let _westernPopularCategoryData = categoryMap.WESTERN[1].OTHERS.map(async (category) => {
+    const res = await cachedFetch(ASYNC_CALLER_URL() + category?.url)
+    westernPopularCategoryPromise = { key: category.title, value: res };
+    return westernPopularCategoryPromise
+
+  });
+
+  let moodPromise = []
+  let _moodCategoryData = categoryMap.MOOD.map(async (category) => {
+    const res = await cachedFetch(ASYNC_CALLER_URL() + category?.url)
+    moodPromise = { key: category.title, value: res };
+    return moodPromise
+
+  });
+
+  //playlist categories.
+  const indianCategory = await Promise.all(_indianCategoryData);
+  const westernPopularCategory = await Promise.all(_westernPopularCategoryData);
+  const westernRockCategory = await Promise.all(_westernRockCategoryData);
+  const moodCategory = await Promise.all(_moodCategoryData);
+
+  //bands artists regional
+  const data = await fetch(
+    ASYNC_CALLER_URL() + `boilerplate`
+  ).then((response) => response.json());
+  // After the server has rendered, pass result to client side by wrapping it in inbuilt-key props
+  return {
+    props: {
+      boilerPlate: data,
+      indianCategory: indianCategory,
+      westernPopularCategory: westernPopularCategory,
+      westernRockCategory: westernRockCategory,
+      moodCategory: moodCategory,
+    },
+  };
 }

@@ -237,11 +237,7 @@ export const categories = [{
                     url: "playlists?query=grunge english",
                     seemore: false,
                 },
-                {
-                    title: "Grunge",
-                    url: "playlists?query=post grunge english",
-                    seemore: false,
-                },
+
                 {
                     title: "Punk",
                     url: "playlists?query=punk",
@@ -257,16 +253,8 @@ export const categories = [{
                     url: "playlists?query=country english",
                     seemore: false,
                 },
-                {
-                    title: "Progressive",
-                    url: "playlists?query=Progressive english",
-                    seemore: false,
-                },
-                {
-                    title: "Progressive",
-                    url: "playlists?query=Psychadelic english",
-                    seemore: false,
-                },
+
+
                 {
                     title: "Progressive",
                     url: "playlists?query=Psychadelic english",
@@ -306,11 +294,7 @@ export const categories = [{
                     url: "playlists?query= Hip Hop english",
                     seemore: false,
                 },
-                {
-                    title: "Hip Hop Workout",
-                    url: "playlists?query= Hip Hop english",
-                    seemore: false,
-                },
+
                 {
                     title: "Gospel",
                     url: "playlists?query= Gospel english",

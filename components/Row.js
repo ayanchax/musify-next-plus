@@ -1,26 +1,16 @@
 import React, { useState, useEffect } from "react";
-import axios from "../configurations/axios";
 import { noImage } from "../utils/utility";
 import { useRouter } from "next/router"
-function Row({ title, fetchUrl, seeMoreOfThis }) {
+
+function Row({ title, contents }) {
     //data hooks
+
     const [playlists, setPlaylists] = useState([]);
     const router = useRouter()
     useEffect(() => {
-        async function fetchData() {
-            const request = await axios.get(fetchUrl, {
-                rejectUnauthorized: false,
-                requestCert: true,
-                agent: false
-            }).then((response) => {
-                setPlaylists(response?.data);
-            }).catch((error) => {
-                console.log(error.message)
-            });
-            return request;
-        }
-        fetchData();
-    }, [fetchUrl]);
+        setPlaylists(contents);
+    }, [contents]);
+
     const navigateTo = (e, object, _type) => {
         e.preventDefault();
 
@@ -29,7 +19,7 @@ function Row({ title, fetchUrl, seeMoreOfThis }) {
         }
 
     }
-    if (playlists.length > 0) {
+    if (playlists?.length > 0) {
         return (
             <div className="font-bold text-gray-100 font-sans ml-5 ">
                 <header className="text-sm md:text-lg lg:text-lg sm:text-sm antialiased sm:subpixel-antialiased md:antialiased">
@@ -55,3 +45,5 @@ function Row({ title, fetchUrl, seeMoreOfThis }) {
     }
 }
 export default Row;
+
+
