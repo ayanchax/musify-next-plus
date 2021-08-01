@@ -22,7 +22,7 @@ import ShareDialog from "../components/ShareDialog";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import parse from "html-react-parser";
-import { BASE, SITE_NAME } from "../configurations/environments";
+import { BASE, SITE_NAME, SITE_TITLE } from "../configurations/environments";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 toast.configure();
@@ -111,7 +111,7 @@ export default function PlayerLite({
     }, []);
     const endedMedia = () => {
         console.log("Media ends");
-        document.title = `${SITE_NAME} | ${featuredPlaylist?.title}`;
+        document.title = featuredPlaylist.title ? (SITE_NAME + " | " + featuredPlaylist.title) : SITE_TITLE
 
     };
     const onPlay = (e) => {
