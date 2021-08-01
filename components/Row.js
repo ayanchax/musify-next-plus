@@ -45,7 +45,7 @@ function Row({ title, contents }) {
             <div className="flex text-md text-gray-300">Content unavailable at this moment.</div>
         }
     } else {
-        return null;
+        return (" ");
     }
 }
 export default Row;
