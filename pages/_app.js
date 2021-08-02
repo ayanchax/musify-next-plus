@@ -14,20 +14,43 @@ import "../components/AutoSuggest.css";
 import "../components/HeaderOption.css";
 import "../components/Row.css";
 import { DataLayer } from "../configurations/DataLayer"
+import { useEffect, useState } from "react"
 import reducer, { initialState } from "../configurations/reducer";
 import Layout from "../components/Layout";
-import { UNDER_MAINT, MAINT_MESSAGE, MAINT_TITLE } from "../configurations/environments";
+import { UNDER_MAINT } from "../configurations/environments";
 import Maintenance from "../components/Maintenance";
+import Login from "../components/Login";
+import { auth } from "../configurations/firebase";
 
 function MyApp({ Component, pageProps }) {
+    const [userLoggedin, setUserLoggedIn] = useState(null);
+    useEffect(() => {
+        //backend listener
+        checkAuth();
+    }, [userLoggedin]);
+    const checkAuth = () => {
+        auth.onAuthStateChanged((authUser) => {
+            if (authUser) {
+                //user logged in
+                setUserLoggedIn(authUser);
 
+            } else {
+                setUserLoggedIn(null);
+            }
+        });
+    }
     return (
-        UNDER_MAINT ? (<Maintenance message={MAINT_MESSAGE} title={MAINT_TITLE} />) : (
-            <DataLayer initialState={initialState} reducer={reducer}>
-                <Layout>
+        <DataLayer initialState={initialState} reducer={reducer}>
+            {UNDER_MAINT ? (<Maintenance />) : !userLoggedin ? (<Login />) : (
+                //    Main Auth Layout
+                <Layout authorizedUser={userLoggedin}>
                     <Component {...pageProps} />
                 </Layout>
-            </DataLayer>))
+            )}
+        </DataLayer>)
+
+
+
 }
 
 export default MyApp;

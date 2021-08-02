@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from "react";
 import { noImage } from "../utils/utility";
 import { useRouter } from "next/router"
@@ -45,7 +46,7 @@ function Row({ title, contents }) {
             <div className="flex text-md text-gray-300">Content unavailable at this moment.</div>
         }
     } else {
-        return (" ");
+        return (<div className="flex text-md text-gray-300">Content unavailable at this moment.</div>);
     }
 }
 export default Row;

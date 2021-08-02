@@ -7,10 +7,10 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { auth, googleAuthProvider } from "../configurations/firebase";
 import { actionTypes } from "../configurations/reducer";
 import { useDataLayerContextValue } from "../configurations/DataLayer";
-import { SITE_NAME, SITE_TITLE, SITE_DESC, SITE_IMAGE, SITE_HOME_URL, SITE_HASH, FB_APP_ID } from "../configurations/environments";
+import { SITE_NAME, SITE_DESC, SITE_IMAGE, SITE_HOME_URL, SITE_HASH, FB_APP_ID } from "../configurations/environments";
 toast.configure();
 
-function Login() {
+function Login({ title }) {
     const [{ }, dispatch] = useDataLayerContextValue();
 
     const signIn = () => {
@@ -63,7 +63,8 @@ function Login() {
             <meta property="og:site_name" content={SITE_NAME} />
             <meta property="og:description" content={SITE_DESC} />
             <meta content="image/*" property="og:image:type" />
-            <meta property="fb:app_id" content={FB_APP_ID} /> </Head>
+            <meta property="fb:app_id" content={FB_APP_ID} />
+        </Head>
         <div className="login__container">
             <div className=" justify-center text-center flex  ">
                 <Loader

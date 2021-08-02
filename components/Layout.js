@@ -3,18 +3,22 @@ import Header from './Header';
 import HeaderActions from './HeaderActions';
 import PlayerLite from './PlayerLite';
 import Search from './Search';
-import { auth } from "../configurations/firebase";
+import { SITE_TITLE, SITE_DESC, SITE_IMAGE, SITE_HOME_URL } from "../configurations/environments";
 import { useDataLayerContextValue } from "../configurations/DataLayer"
 import { actionTypes } from "../configurations/reducer";
-import { SITE_TITLE, SITE_DESC, SITE_IMAGE, SITE_HOME_URL } from "../configurations/environments";
-import Login from "./Login";
 const Layout = ({ children, ...pageProps }) => {
-
-    // user
     const [user, dispatch] = useDataLayerContextValue();
-    const [_user, setUser] = useState(null);
-
+    // register auth user with useEffect
+    useEffect(() => {
+        if (pageProps?.authorizedUser) {
+            dispatch({
+                type: actionTypes.SET_USER,
+                user: pageProps?.authorizedUser,
+            });
+        }
+    }, [dispatch, pageProps?.authorizedUser]);
     // meta
+    console.log()
     const [currentUrl, setCurrentURL] = useState(SITE_HOME_URL);
     const [title, setTitle] = useState(SITE_TITLE);
     const [description, setDescription] = useState(SITE_DESC);
@@ -65,42 +69,14 @@ const Layout = ({ children, ...pageProps }) => {
             metaTitle: setTitle, metaDescription: setDescription, metaImage: setImage, searchSuggestionWindow: setSearchSuggestionWindowOpened
         })
     });
-
-    useEffect(() => {
-        //backend listener
-        auth.onAuthStateChanged((authUser) => {
-            if (authUser) {
-                //user logged in
-                setUser(authUser);
-                dispatch({
-                    type: actionTypes.SET_USER,
-                    user: authUser,
-                });
-            } else {
-                //user logged out
-                dispatch({
-                    type: "LOG_OUT",
-                    user: null,
-                });
-                setUser(null);
-            }
-        });
-    }, [_user]);
-
-    if (!_user) {
-        return (<Login title="Musify - Sign up" />)
-    }
-
     return (
-        <div className="app__layout">
+        <div className="app__layout authorized secured tls3 musify-window">
             <Header />
             <Search
                 isSuggestionOpened={searchSuggestionWindowOpened}
                 toggleSearchSuggestionWindow={toggleSearchSuggestionWindow}
             />
             <HeaderActions />
-
-
             {
                 React.cloneElement(children, {
                     media: setMediaObject,
@@ -127,6 +103,7 @@ const Layout = ({ children, ...pageProps }) => {
                 metaImage={setImage}
                 playerMinimized={playerMinimized}
             />
+
         </div>
     );
 }

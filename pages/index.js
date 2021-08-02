@@ -70,7 +70,7 @@ export default function Home({ boilerPlate, indianCategory, westernPopularCatego
 
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content={SITE_NAME} />
-        <meta name="twitter:url" content={window.location.href} />
+        <meta name="twitter:url" content={SITE_HOME_URL} />
         <meta name="twitter:title" content={_title === SITE_TITLE
           ? SITE_TITLE
           : `${SITE_NAME} | ${parse(_title)}`} />

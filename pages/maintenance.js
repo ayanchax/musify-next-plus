@@ -2,6 +2,7 @@ import React from 'react'
 import Head from "next/head";
 import { SITE_NAME, SITE_DESC, SITE_IMAGE, SITE_HOME_URL, SITE_HASH, FB_APP_ID, MAINT_TITLE, MAINT_MESSAGE } from "../configurations/environments";
 function Maintenance() {
+
     return (
         <div className="text-center flex w-full px-20 py-20 justify-center text-black">
             <Head>
@@ -33,8 +34,7 @@ function Maintenance() {
                 <meta property="fb:app_id" content={FB_APP_ID} />
 
             </Head>
-            <div className="text-gray-200 text-lg justify-center flex">{MAINT_MESSAGE}</div>
-
+            {MAINT_MESSAGE}
         </div>
     )
 }
