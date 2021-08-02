@@ -165,10 +165,10 @@ function SongContent({
                 <ShareDialog
                     url={
                         BASE +
-                        "song/" +
+                        "song?songid=" +
                         selectedSongNeedle?.id +
-                        "/" +
-                        selectedSongNeedle?.title
+                        "&songTitle=" +
+                        encodeURIComponent(selectedSongNeedle?.title)
                     }
                     networks={["facebook", "messenger", "whatsapp"]}
                     content={selectedSongNeedle}

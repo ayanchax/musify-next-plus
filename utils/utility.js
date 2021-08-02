@@ -50,5 +50,12 @@ export const formatted_duration = (value) => {
     else return hours + " hrs " + minutes + " minutes";
 };
 
+export const navigate = (url, deployType) => {
+    if (deployType === "prod") {
+        if (url) window.location.href = url;
+    }
+
+}
+
 export const noImage =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLG67OCTdsrpf_nDsSC03j5j2x7pSK7XOogQ&usqp=CAU";

@@ -5,6 +5,8 @@ import { actionTypes } from "../configurations/reducer";
 import { auth } from "../configurations/firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {navigate} from "../utils/utility"
+import {BASE, ENV} from "../configurations/environments"
 
 toast.configure();
 
@@ -48,13 +50,14 @@ function Header() {
     };
     return (<header className="header fixed flex h-12 top-0 w-full z-10 justify-between ">
         <img
-            onClick={(e) => window.location.reload()}
+            onClick={(e) => navigate(BASE, ENV)}
             className="fixed object-contain cursor-pointer w-36 left-0 top-1"
             src="/logo.png"
             alt="Musify-Logo"
         />
 
-
+{user?.user && (
+    <div>
         <img onClick={(e) => openAccountPopOver(e)}
 
             className="fixed right-5 w-8 object-contain mt-2 cursor-pointer"
@@ -83,6 +86,8 @@ function Header() {
 
 
         </Popover>
+        </div>
+)}
     </header>);
 }
 

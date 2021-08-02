@@ -34,7 +34,7 @@ function PlayerListMoreOptions({ onClosed }) {
             <hr className="player__horizontalBar" />
 
             <li className="player__moreOptionsList" role="presentation">
-                <CopyToClipboard text={BASE + "playlist?playlistid=" + featuredPlaylist?.id + "&playlistTitle=" + featuredPlaylist?.title}
+                <CopyToClipboard text={BASE + "playlist?playlistid=" + featuredPlaylist?.id + "&playlistTitle=" + encodeURIComponent(featuredPlaylist?.title)}
                     onCopy={() => setCopiedPlaylistLink(true)}>
                     <span>Copy Playlist Link</span>
                 </CopyToClipboard>

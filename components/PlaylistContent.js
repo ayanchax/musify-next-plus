@@ -242,7 +242,7 @@ function PlaylistContent({ playlistSongs, setSearchSuggestionWindowOpened, isInd
     return playlistSongs && (<div className="content" onClick={(e) => setSearchSuggestionWindowOpened(false)}>
 
         <ShareDialog
-            url={BASE + "song?songid=" + selectedSongNeedle?.id + "&songTitle=" + selectedSongNeedle?.title}
+            url={BASE + "song?songid=" + selectedSongNeedle?.id + "&songTitle=" + encodeURIComponent(selectedSongNeedle?.title)}
             networks={[
                 "facebook",
                 "messenger",
@@ -264,7 +264,7 @@ function PlaylistContent({ playlistSongs, setSearchSuggestionWindowOpened, isInd
             uniqueToken={showModal ? uuidv4() : ""}
         />
         <PlaylistShareDialog
-            url={BASE + "playlist?playlistid=" + playlistSongs?.id + "&playlistTitle=" + playlistSongs?.title}
+            url={BASE + "playlist?playlistid=" + playlistSongs?.id + "&playlistTitle=" + encodeURIComponent(playlistSongs?.title)}
             networks={[
                 "facebook",
                 "messenger",

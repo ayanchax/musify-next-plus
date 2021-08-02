@@ -44,6 +44,7 @@ const ShareDialog = ({
     uniqueToken,
 }) => {
     const [{ pause, play }, dispatch_v2] = useDataLayerContextValue();
+    
     useEffect(() => {
         if (metaCurrentUrl && metaTitle && metaDescription && metaImage) {
             if (

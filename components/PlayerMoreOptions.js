@@ -98,12 +98,12 @@ function PlayerMoreOptions({ openedFromPlaylist, onClosed }) {
                             "song?songid=" +
                             selectedSongNeedle?.id +
                             "&songTitle=" +
-                            selectedSongNeedle?.title
+                            encodeURIComponent(selectedSongNeedle?.title)
                             : BASE +
                             "song?songid=" +
                             currentSongPlaying?.id +
                             "&songTitle=" +
-                            currentSongPlaying?.title
+                            encodeURIComponent(currentSongPlaying?.title)
                     }
                     onCopy={() => setCopiedSongLink(true)}
                 >
