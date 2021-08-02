@@ -264,7 +264,7 @@ function PlaylistContent({ playlistSongs, setSearchSuggestionWindowOpened, isInd
             uniqueToken={showModal ? uuidv4() : ""}
         />
         <PlaylistShareDialog
-            url={window.location.href}
+            url={BASE + "playlist?playlistid=" + playlistSongs?.id + "&playlistTitle=" + playlistSongs?.title}
             networks={[
                 "facebook",
                 "messenger",
