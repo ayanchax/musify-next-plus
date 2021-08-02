@@ -48,10 +48,6 @@ function MyApp({ Component, pageProps }) {
                 </Layout>
             )}
         </DataLayer>)
-
-
-
 }
-
 export default MyApp;
 
