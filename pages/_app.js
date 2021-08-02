@@ -23,7 +23,7 @@ import Login from "../components/Login";
 import { auth } from "../configurations/firebase";
 
 function MyApp({ Component, pageProps }) {
-    const [userLoggedin, setUserLoggedIn] = useState(null);
+    const [userLoggedin, setUserLoggedIn] = useState(true);
     useEffect(() => {
         //backend listener
         checkAuth();
