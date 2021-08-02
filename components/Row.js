@@ -43,10 +43,10 @@ function Row({ title, contents }) {
                 </div>
             );
         } catch (e) {
-            return (<div className="flex text-md text-gray-300">Content unavailable at this moment.</div>)
+            return (" ")
         }
-    } else {
-        return (<div className="flex text-md text-gray-300">Content unavailable at this moment.</div>);
+    } else { 
+        return (" ");
     }
 }
 export default Row;
