@@ -23,27 +23,12 @@ import Login from "../components/Login";
 import { auth } from "../configurations/firebase";
 
 function MyApp({ Component, pageProps }) {
-    const [userLoggedin, setUserLoggedIn] = useState(true);
-    useEffect(() => {
-        //backend listener
-        checkAuth();
-    }, [userLoggedin]);
-    const checkAuth = () => {
-        auth.onAuthStateChanged((authUser) => {
-            if (authUser) {
-                //user logged in
-                setUserLoggedIn(authUser);
-
-            } else {
-                setUserLoggedIn(null);
-            }
-        });
-    }
+    
     return (
         <DataLayer initialState={initialState} reducer={reducer}>
-            {UNDER_MAINT ? (<Maintenance />) : !userLoggedin ? (<Login />) : (
+            {UNDER_MAINT ? (<Maintenance />):(
                 //    Main Auth Layout
-                <Layout authorizedUser={userLoggedin}>
+                <Layout>
                     <Component {...pageProps} />
                 </Layout>
             )}

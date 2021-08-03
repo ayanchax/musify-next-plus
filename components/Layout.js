@@ -4,27 +4,13 @@ import HeaderActions from './HeaderActions';
 import PlayerLite from './PlayerLite';
 import Search from './Search';
 import { SITE_TITLE, SITE_DESC, SITE_IMAGE, SITE_HOME_URL } from "../configurations/environments";
-import { useDataLayerContextValue } from "../configurations/DataLayer"
-import { actionTypes } from "../configurations/reducer";
+
 const Layout = ({ children, ...pageProps }) => {
-    const [user, dispatch] = useDataLayerContextValue();
-    // register auth user with useEffect
-    useEffect(() => {
-        if (pageProps?.authorizedUser) {
-            dispatch({
-                type: actionTypes.SET_USER,
-                user: pageProps?.authorizedUser,
-            });
-        }
-    }, [dispatch, pageProps?.authorizedUser]);
-    // meta
-    console.log()
+     // meta
     const [currentUrl, setCurrentURL] = useState(SITE_HOME_URL);
     const [title, setTitle] = useState(SITE_TITLE);
     const [description, setDescription] = useState(SITE_DESC);
-    const [image, setImage] = useState(
-        SITE_IMAGE
-    );
+    const [image, setImage] = useState(SITE_IMAGE);
     // media
     const [mediaObject, setMediaObject] = useState(null);
     const [mediaPaused, setMediaPaused] = useState(false);
