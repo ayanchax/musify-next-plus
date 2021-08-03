@@ -77,7 +77,7 @@ function PlayerMoreOptions({ openedFromPlaylist, onClosed }) {
                             }
                         />,
                         null,
-                        "Musify | 2021",
+                        "#सुनलो | 2021",
                         true
                     )
                 }

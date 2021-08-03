@@ -56,7 +56,7 @@ const Layout = ({ children, ...pageProps }) => {
         })
     });
     return (
-        <div className="app__layout authorized secured tls3 musify-window">
+        <div className="app__layout authorized secured tls3 #सुनलो-window">
             <Header />
             <Search
                 isSuggestionOpened={searchSuggestionWindowOpened}

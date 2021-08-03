@@ -122,7 +122,7 @@ const PlaylistShareDialog = ({
                                             <FacebookShareButton
                                                 url={url}
                                                 quote={contentTitle}
-                                                hashtag="#musify"
+                                                hashtag="#सुनलो"
                                                 className="dialog__some-network__share-button"
                                             >
                                                 <FacebookIcon size={32} round />
@@ -131,7 +131,7 @@ const PlaylistShareDialog = ({
                                         {network === "messenger" && (
                                             <FacebookMessengerShareButton
                                                 url={url}
-                                                hashtag="#musify"
+                                                hashtag="#सुनलो"
                                                 quote={contentTitle}
                                                 className="dialog__some-network__share-button"
                                             >
@@ -142,7 +142,7 @@ const PlaylistShareDialog = ({
                                         {network === "whatsapp" && (
                                             <WhatsappShareButton
                                                 url={url}
-                                                hashtag="#musify"
+                                                hashtag="#सुनलो"
                                                 quote={contentTitle}
                                                 className="dialog__some-network__share-button"
                                             >
@@ -152,7 +152,7 @@ const PlaylistShareDialog = ({
                                         {network === "twitter" && (
                                             <TwitterShareButton
                                                 url={url}
-                                                hashtag="#musify"
+                                                hashtag="#सुनलो"
                                                 quote={contentTitle}
                                                 className="dialog__some-network__share-button"
                                             >
@@ -163,7 +163,7 @@ const PlaylistShareDialog = ({
                                         {network === "linkedin" && (
                                             <LinkedinShareButton
                                                 url={url}
-                                                hashtag="#musify"
+                                                hashtag="#सुनलो"
                                                 quote={contentTitle}
                                                 className="dialog__some-network__share-button"
                                             >

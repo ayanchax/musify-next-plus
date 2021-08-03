@@ -52,8 +52,8 @@ function Header() {
         <img
             onClick={(e) => navigate(BASE, ENV)}
             className="fixed object-contain cursor-pointer w-36 left-0 top-1"
-            src="/logo.png"
-            alt="Musify-Logo"
+            src="/logo-hindi-2-removebg-preview.png"
+            alt="#सुनलो-Logo"
         />
 
 {user?.user && (

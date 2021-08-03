@@ -57,7 +57,7 @@ function App() {
   if (maint_mode) {
     return (
       <div className="text-gray-200 justify-center text-center">
-        <HelmetMetaData title="Musify - Maintainence Mode" />
+        <HelmetMetaData title="#सुनलो - Maintainence Mode" />
         Site is in maintainence mode.
       </div>
     );
