@@ -47,6 +47,7 @@ function Playlist({
                         ? `${SITE_NAME} | ${playlistTitle}`
                         : `${SITE_NAME} | ${parse(_title)}`}
                 </title>
+                <script data-ad-client="ca-pub-7898333112169821" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <link rel="icon" href="/favicon.ico" />
                 <link rel="canonical" href={`https://musify-plus.vercel.app/playlist?playlistid=${playlistid}&playlistTitle=${playlistTitle}`} />
                 <meta charSet="utf-8" />

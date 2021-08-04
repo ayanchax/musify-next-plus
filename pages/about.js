@@ -8,6 +8,7 @@ function About() {
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <Head>
                 <title>{title ? title : "About Page"}</title>
+                <script data-ad-client="ca-pub-7898333112169821" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <link rel="icon" href="/favicon.ico" />
                 <meta charSet="utf-8" />
                 <meta httpEquiv="X-UA-Compatible" content="IE=edge" />

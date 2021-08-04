@@ -29,6 +29,7 @@ function Song({ results, media, pauseMedia, favoriteMedia, metaCurrentUrl, metaT
         <div className="playlist__wrapper">
             <Head>
                 <title>{_title === songTitle ? `${SITE_NAME} | ${songTitle}` : `${SITE_NAME} | ${parse(_title)}`}</title>
+                <script data-ad-client="ca-pub-7898333112169821" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <link rel="icon" href="/favicon.ico" />
                 <link rel="canonical" href={`https://musify-plus.vercel.app/song?songid=${songid}&songTitle=${songTitle}`} />
                 <meta charSet="utf-8" />

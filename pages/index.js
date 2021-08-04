@@ -35,6 +35,7 @@ export default function Home({ boilerPlate, indianCategory, westernPopularCatego
             : `${SITE_NAME} | ${parse(_title)}`}
         </title>
         <link rel="icon" href="/favicon.ico" />
+        <script data-ad-client="ca-pub-7898333112169821" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
